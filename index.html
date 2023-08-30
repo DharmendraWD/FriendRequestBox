@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add & Remove Frnd Request</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+<style>
+.main{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.cardBox{
+    width: 20%;
+    border-radius: 12px;
+    height: 50%;
+    border: 1px solid rgb(29, 29, 29);
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    background-color: rgb(155, 154, 154);
+    z-index: 0;
+}
+.cardBox img{
+    width: 70%;
+    border-radius: 6px;
+ }
+ h1{
+font-size: 20px;
+ }
+ .notification, #addRem, .cut{
+    cursor: pointer;
+ }
+ #addRem{
+    font-size: 15px;
+    outline: 0;
+    border: none;
+    background-color: cadetblue;
+    border-radius: 3px;
+    height: 30px;
+    padding: 3px 7px;
+    /* transition: 3s ease-in-out; */
+    z-index: 9999;
+
+ }
+ h4{
+    color: red;
+    transition: .3s ease-in-out;
+ }
+ .notification{
+    position: absolute;
+    right: 8px;
+    /* transform: rotate(-9deg); */
+    bottom: 8px;
+    z-index: 9999;
+ }
+ .notification i{
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    /* background-color: rgb(29, 27, 27); */
+ }
+ .notificationReslt{
+    height: 80px;
+    width: 100%;
+ backdrop-filter: blur(12px);
+ -webkit-backdrop-filter: blur(12px);
+ 
+    position: absolute;
+    bottom: 0;
+    border-radius: 12px;
+opacity: 0;
+    transition: .3s ease-in-out;
+ }
+ .notificationReslt p{
+text-align: center;
+font-size:17px ;
+color: white;
+ }
+ .one{
+    display:inline;
+color: red;
+position:absolute;
+left: 11px;
+bottom: 14px;
+background-color: red;
+color: white;
+width: 18px;
+text-align: center;
+border-radius: 50%;
+font-size: 19px;
+ }
+ .cut{
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    z-index: 9;
+ }
+
+ /* Media queries  */
+ @media(max-width:800px){
+    .cardBox{
+        width: 50%;
+        height: 40%;
+    }
+    .cardBox img{
+        width: 60%;
+    }
+ }
+</style>
+
+</head>
+<body>
+    
+<div class="main">
+    <div class="cardBox">
+        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2F0fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60" alt="">
+        <h4>Stranger</h4>
+        <h1>John Doe</h1>
+        <button id="addRem">Add Friend</button>
+        <div class="notification"><i class="ri-notification-3-line"><div class="one"></div></i></div>
+        <div class="notificationReslt"><div class="cut">X</div><p> <b> No New Notification.</b></p></div>
+    </div>
+</div>
+
+
+    <script>
+let status = document.querySelector("h4")
+// let name = document.querySelector("h1")
+let addRem = document.querySelector("#addRem")
+let body= document.body;
+let one= document.querySelector(".one");
+let notification = document.querySelector(".notification");
+let notificationReslt = document.querySelector(".notificationReslt");
+let notificationResltP = document.querySelector(".notificationReslt p");
+let cut = document.querySelector(".cut");
+
+let check =0;
+// For Getting Random Number
+let awaitTimeforNot= Math.random(Math.floor);
+let awaitTimeforNot10 =awaitTimeforNot*10;
+
+
+addRem.addEventListener("click",()=>{
+if(check==0){
+    addRem.innerText="Unfriend"
+    check=1;
+    setTimeout(() => {
+        if(awaitTimeforNot10>=5){
+            status.innerText="Friend"
+            status.style.color="green"
+            one.innerText="1";
+            notificationResltP.innerText="John Doe has Accepted your Friend Request."
+        }
+   
+}, awaitTimeforNot10*1000);
+}
+else{
+    status.style.color="red"
+    addRem.innerText="Add Friend"
+    status.innerText="Stranger"
+    check=0; 
+    location.reload();
+}
+})
+
+notification.addEventListener("click", ()=>{
+    notificationReslt.style.opacity=1;
+    addRem.style.zIndex="0"
+})
+cut.addEventListener("click", ()=>{
+    notificationReslt.style.opacity=0;
+    console.log("hi");
+    addRem.style.zIndex="9999"
+    one.innerText=" ";
+})
+console.log(awaitTimeforNot10);
+    </script>
+</body>
+</html>
